@@ -1,13 +1,11 @@
-# base image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+FROM mcr.microsoft.com/dotnet/core/sdk
 
-LABEL version="1.0" maintainer="ALLAN"
+LABEL author=”Name”
 
-# name in container
+ENV ASPNETCORE_URLS=http://+:5000
+ENV ASPNETCORE_ENVIRONMENT=”development”
+
+EXPOSE 5000
 WORKDIR /app
 
-# copy to container
-COPY ./dist .
-
-# command to run then starts
-ENTRYPOINT ["dotnet", "docker-dotnetcore-example.dll"]
+CMD [“/bin/bash”, “-c”, “dotnet restore && dotnet run”]
